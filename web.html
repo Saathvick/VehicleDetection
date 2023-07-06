@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vehicle Speed</title>
+  <script>
+    var wsUrl = 'ws://192.168.1.8:3000/';
+    var webSocket = new WebSocket(wsUrl);
+    webSocket.onmessage = function(event) {
+      var speed = parseFloat(event.data);
+      document.getElementById('speed').innerHTML = 'Speed: ' + speed + ' Km/Hr';
+
+      if (speed > 30) {
+        // Add your code for handling notifications when speed exceeds the threshold
+        alert('Vehicle is overspeeding!');
+      }
+    };
+    webSocket.onclose = function(event) {
+      console.log('WebSocket connection closed');
+    };
+  </script>
+</head>
+<body>
+  <h1>Vehicle Speed</h1>
+  <h2 id="speed">Speed: </h2>
+</body>
+</html>
